@@ -1,0 +1,14 @@
+.card {
+  border: 1px solid var(--harbor-line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 16px;
+}
+
+.muted {
+  color: var(--harbor-muted);
+}
+
+.stack > * + * {
+  margin-top: 12px;
+}

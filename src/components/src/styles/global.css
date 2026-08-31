@@ -1,0 +1,26 @@
+:root {
+  --harbor-ink: #1a2332;
+  --harbor-muted: #5c6b7a;
+  --harbor-line: #d8dee6;
+  --harbor-bg: #f6f8fb;
+  --harbor-accent: #0b6e4f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: var(--harbor-ink);
+  background: var(--harbor-bg);
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+button, select {
+  font: inherit;
+}
