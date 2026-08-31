@@ -1,0 +1,9 @@
+{
+  "name": "harbor-web",
+  "version": "1.0.0",
+  "description": "Harbor provider console — care request review UI",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
