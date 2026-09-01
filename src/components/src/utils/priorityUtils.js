@@ -24,8 +24,7 @@ export function resolvePriorityStyle(level) {
 }
 
 /**
- * Contract field is `priority`. Do not invent alternate names here.
- * PriorityBanner currently (incorrectly) reads priorityLevel — see that component.
+ * Contract field is `priority` (STAT | URGENT | ROUTINE).
  */
 export function getPriorityFromRequest(request) {
   return request?.priority ?? "ROUTINE";
