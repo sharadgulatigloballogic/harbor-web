@@ -8,21 +8,10 @@ const PRIORITY_STYLE = {
 
 /**
  * PriorityBanner — shows clinical priority for a care request.
- *
- * BUG (Scenario 1 — frontend half):
- * Reads `request.priorityLevel`, but the API contract (and nova-api DTO)
- * expose the field as `priority`. Because `priorityLevel` is always
- * undefined, the banner falls back to ROUTINE styling even when the API
- * correctly returns STAT or URGENT.
- *
- * Fix: read `request.priority` instead of `request.priorityLevel`.
- *
- * Note: nova-api currently also hard-codes priority to ROUTINE, so BOTH
- * halves must be fixed for STAT/URGENT patients to display correctly.
+ * Reads the API contract field `request.priority` (STAT | URGENT | ROUTINE).
  */
 export default function PriorityBanner({ request }) {
-  // BUG: wrong field name — should be request.priority
-  const level = request?.priorityLevel ?? "ROUTINE";
+  const level = request?.priority ?? "ROUTINE";
   const style = PRIORITY_STYLE[level] ?? PRIORITY_STYLE.ROUTINE;
 
   return (
