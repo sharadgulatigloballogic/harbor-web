@@ -45,7 +45,7 @@ export default function CareRequestDetail({ patientId }) {
 
   // BUG (Scenario 2): reads singular `insurancePlan` and wraps it manually.
   // Should read plural `insurancePlans` directly (an array from the API).
-  const plans = [request.insurancePlan].filter(Boolean);
+  const plans = request.insurancePlans ?? [];
 
   const secondary = getSecondaryPlan(plans);
   const hasSecondary = secondary !== null;
