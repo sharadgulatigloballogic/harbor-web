@@ -8,26 +8,6 @@ const API_BASE = "http://localhost:8080/api";
 /**
  * CareRequestDetail — displays a care request for a patient.
  *
- * --- Scenario 2 (contract adaptation to broken API) ---
- *
- * Nova API currently returns:
- *   { "insurancePlan": { ...single object... } }   <-- singular, object
- *
- * The API contract specifies:
- *   { "insurancePlans": [ ...array... ] }           <-- plural, array
- *
- * This component was adapted to the broken response, so it reads
- * `data.insurancePlan` (singular) and wraps it in a one-element array.
- *
- * Consequences:
- *  1. Secondary plans are always absent — eligibility can never confirm dual coverage.
- *  2. When nova-api is fixed to return `insurancePlans`, `data.insurancePlan`
- *     becomes undefined and the UI breaks unless this component is updated too.
- *
- * Fix required here for Scenario 2:
- *   - Read `data.insurancePlans` (plural) instead of `data.insurancePlan`
- *   - Use the list directly (no manual wrapping)
- *
  * --- Scenario 1 ---
  * PriorityBanner (separate component) has its own field-name bug; see that file.
  */
@@ -56,9 +36,7 @@ export default function CareRequestDetail({ patientId }) {
   if (error)   return <p style={{ color: "red" }}>Error: {error}</p>;
   if (!request) return <p>No care request found.</p>;
 
-  // BUG (Scenario 2): reads singular `insurancePlan` and wraps it manually.
-  // Should read plural `insurancePlans` directly (an array from the API).
-  const plans = [request.insurancePlan].filter(Boolean);
+  const plans = Array.isArray(request.insurancePlans) ? request.insurancePlans : [];
 
   const primary   = getPrimaryPlan(plans);
   const secondary = getSecondaryPlan(plans);
